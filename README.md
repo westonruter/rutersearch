@@ -9,3 +9,5 @@ the GPL license (if stated differently anywhere else, please disregard), but I
 would really hope that no one would use this now!
 
 You can see the original page where I hosted this project on the Wayback Machine: http://web.archive.org/web/20021002111914/http://www.ruter.net/soft/rutersearch/
+
+The old [project documentation](http://westonruter.github.com/rutersearch/documentation.html) is also available.
