@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <title>RuterSearch MySQL</title>
+   <style type="text/css">
+        <!--
+
+        body {
+                font-family:Veranda,Arial,Helvetica;
+                font-size:12pt;
+		text-align:center;
+        }
+
+        A:link { color: #006979; text-decoration:none;}
+        A:active { color:#00A8BF; text-decoration:underline;}
+        A:hover { color:#00A8BF; text-decoration:underline;}
+        A:visited { color: #006979; text-decoration:none;}
+
+        div.header {
+                margin-bottom:15px;
+                font-size:25pt;
+                font-style:italic;
+                font-weight:bold;
+        }
+
+        -->
+   </style>
+
+   <script language="javascript" type="text/javascript">
+	<!--
+
+		function searchhelp(){
+			alert("Here are a few features that might help you out:\n\n 1. Phrases -- \"A Phrase\"\n 2. Required words -- +required\n 3. Rejected words -- -required\n 4. Section Restrictions -- title(title search)\n 5. Wildcards -- ?ill Clint*\n\nWith these you can refine your search query to yield more accurate results.");
+		}
+
+	//-->
+   </script>
+
+</head>
+<body>
+
+<div class="header">RuterSearch MySQL Perl v3.5</div>
+
+Welcome to our search page. This search enigne is very powerful, so beware, the results might blow you away :o)
+
+<div align="center">
+<form action="search.cgi" method="get">
+Type: <select name="type">
+<option>html</option>
+</select>
+<br>
+Query: <input type="text" size="20" name="string"><br>
+Per page: <select name="perpage">
+<option>10</option>
+<option>20</option>
+<option>30</option>
+<option>40</option>
+<option>50</option>
+<option>All</option>
+</select><br>
+Highlight matched words: 
+<select name="stylewords" >
+	<option value="false">No</option>
+	<option value="true">Yes</option>
+</select><br>
+<input type="submit" value="Search out of _totalentries_ entries" >
+<a href="javascript:void(0)" onclick="searchhelp()">Help</a>
+</form>
+</div>
+
+<div align="center" style="font-size:8pt">
+Search by <a href="http://www.ruter.net/soft/rutersearch/">RuterSearch</a>
+</div>
+
+</body>
+</html>

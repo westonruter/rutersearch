@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.72 [en] (Win98; U) [Netscape]">
+   <title>Add an entry</title>
+	<style type="text/css">
+        <!--
+
+        body {
+                font-family:Veranda,Arial,Helvetica;
+                font-size:12pt;
+
+        }
+
+        A:link { color: #006979; text-decoration:none;}
+        A:active { color:#00A8BF; text-decoration:underline;}
+        A:hover { color:#00A8BF; text-decoration:underline;}
+        A:visited { color: #006979; text-decoration:none;}
+
+        div.header {
+		text-align:center;
+                margin-bottom:15px;
+                font-size:25pt;
+                font-style:italic;
+                font-weight:bold;
+        }
+
+        -->
+   </style>
+
+<script language="javascript" type="text/javascript">
+<!--
+
+/* Note to Weston!!! Finish the form validataion script! */
+
+function checktype(){
+	checktitle();
+}
+
+function checktitle(){
+	checkdescription();
+}
+
+function checkdescription(){
+	checkurl();
+}
+
+function checkurl(){
+	checkkeywords();
+}
+
+function checkkeywords(){
+	checkauthor();
+}
+
+function checkauthor(){
+	document.addform.submit();
+}
+
+//-->
+</script>
+</head>
+<body>
+
+<div class="header">Add an entry</div>
+<form name="addform" action="add.cgi">
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" >
+<tr>
+<td WIDTH="35%">
+<div align=right>Type:&nbsp;</div>
+</td>
+
+<td WIDTH="65%"><input type="text" size="5" name="type" value="html"></td>
+</tr>
+
+<tr>
+<td>
+<div align=right>Title:&nbsp;</div>
+</td>
+
+<td><input type="text" size="20" name="title"></td>
+</tr>
+
+<tr>
+<td>
+<div align=right>Description:&nbsp;</div>
+</td>
+
+<td><input type="text" size="60" name="description"></td>
+</tr>
+
+<tr>
+<td>
+<div align=right>Url:&nbsp;</div>
+</td>
+
+<td><input type="text" size="30" name="url"></td>
+</tr>
+
+<tr>
+<td>
+<div align=right>Keywords:&nbsp;</div>
+</td>
+
+<td><input type="text" size="30" name="keywords"></td>
+</tr>
+
+<tr>
+<td>
+<div align=right>Author:&nbsp;</div>
+</td>
+
+<td><input type="text" size="20" name="author"></td>
+</tr>
+</table></center>
+
+<center>
+<div><input type="button" value="Add to _totalentries_ entries" onClick="checktype()" ></form></center>
+
+</body>
+</html>

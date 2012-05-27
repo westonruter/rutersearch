@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <title>Search Results for '_searchqueryHTML_'</title>
+   <style type="text/css">
+	<!--
+
+	body {
+		font-family:Veranda,Arial,Helvetica;
+		font-size:12pt;
+	}
+
+	A:link { color: #006979; text-decoration:none;}
+	A:active { color:#00A8BF; text-decoration:underline;}
+	A:hover { color:#00A8BF; text-decoration:underline;}
+	A:visited { color: #006979; text-decoration:none;}
+
+	div.header {
+		margin-bottom:15px;
+		font-size:25pt;
+		font-style:italic;
+		font-weight:bold;
+	}
+
+
+	/* Classes that can be applied to tags in "resulttemplate.html" 
+		or applied automatically if "generate navigation" is set to true */
+
+	/* Edit this to change the appearance of matched words */
+	.matchedWord {
+		font-style:italic;
+		background-color:#EAEAEA;
+	}
+
+	.resultNumber {
+		font-size:8pt;
+	}
+
+	.date {
+		display:none;
+		position:relative;
+		left:10px;
+		font-size:8pt;
+	}
+
+	.resultType {
+		display:none;
+		font-family:Veranda,Arial,Helvetica;
+		font-size:11pt;
+		color:purple;
+	}
+
+	.resultTitle {
+		font-family:Veranda,Arial,Helvetica;
+		font-size:13pt;
+		font-weight:bold;
+	}
+	.resultDescription {
+		margin-left:15px;
+		font-family:Veranda,Arial,Helvetica;
+		font-size:11pt;
+	}
+	.resultUrl {
+		margin-left:15px;
+		font-family:Veranda,Arial,Helvetica;
+		font-size:8pt;
+		font-style:italic;
+	}
+	.resultKeywords {
+		display:block;
+		margin-left:20px;
+		font-family:Veranda,Arial,Helvetica;
+		font-size:10pt;
+		color:red;
+	}
+	.resultAuthor {
+		display:block;
+		margin-left:30px;
+		font-family:Veranda,Arial,Helvetica;
+		font-size:11pt;
+		font-weight:bold;
+		color:blue;
+	}
+
+
+	/* Results Navigation Styles */
+	.noMatches {
+		font-size:20pt;
+		font-weight:bold;
+		text-align:center;
+	}
+	.endOfResults {
+		text-decoration:underline;
+		font-style:italic;
+		font-weight:bold;
+		text-align:center;
+		font-size:18pt;
+		margin-bottom:20px;
+	}
+	.pageJump {
+		text-align:center;
+		font-size:16pt;
+		font-weight:bold;
+	}
+
+	-->
+   </style>
+
+   <script language="javascript" type="text/javascript">
+	<!--
+
+		function searchhelp(){
+			alert("Here are a few features that might help you out:\n\n 1. Phrases -- \"A Phrase\"\n 2. Required words -- +required\n 3. Rejected words -- -required\n 4. Section Restrictions -- title(title search)\n 5. Wildcards -- ?ill Clint*\n\nWith these you can refine your search query to yield more accurate results.");
+		}
+
+	//-->
+   </script>
+
+</head>
+<body>
+
+<div class="header" align="center">Search Results, page _currentpage_</div>
+<div align="center">
+<form name="searchform" action="search.cgi">
+Type: <select name="type">
+<option>html
+</select>
+<br>
+Query: <input type="text" size="20" name="string"  value="_searchqueryHTML_"><br>
+Per page: <select name="perpage">
+<option>10
+<option>20
+<option>30
+<option>40
+<option>50
+<option>All
+</select><br>
+Highlight matched words: 
+<select name="stylewords" >
+	<option value="false">No</option>
+	<option value="true">Yes</option>
+</select><br>
+<input type="submit" value="Search out of _totalentries_ entries">
+<a href="javascript:void(0)" onclick="searchhelp()">Help</a>
+</form>
+
+</div>
+
+You searched the media '_searchtype_' for '_searchqueryHTML_'.<hr>
+
+
+<blockquote>
+_searchresults_
+</blockquote>
+
+
+
+
+<script language="javascript" type="text/javascript">
+<!--
+//Manipulate the style words checkbox
+if(_stylewords_){
+	document.searchform.stylewords.selectedIndex = 1; //"Yes" is the second element in the select box
+}
+else {
+	document.searchform.stylewords.selectedIndex = 0; //"No" is the first element in the select box
+}
+
+//Manipulate the per page drop down box
+
+
+
+//The following script is required if you set the $usejavascript variable to 1. Please modify it all you want.
+
+if(_totalresults_ == 0){
+	document.write("<div class=\"noMatches\">Sorry, no matches</div>\n");
+}
+else {
+	if(!_nextpage_){
+		document.write("<div class=\"endOfResults\">End of Results</div>\n");
+	}
+	//Print jump links on the bottom (previous page/next page)
+	if(_previouspage_ || _nextpage_){
+		document.write("<div align=\"center\" class=\"pageJump\">");
+
+		//Previous page link
+		if(_previouspage_){
+			document.write("<a href=\"_previouspageurl_\">Previous page</a>");
+		}
+		//Separator between the links
+		if(_previouspage_ && _nextpage_){
+			document.write("&nbsp;&nbsp;|&nbsp;&nbsp;");
+		}
+		//Next page link
+		if(_nextpage_){
+			document.write("<a href=\"_nextpageurl_\">Next page</a>");
+		}
+
+		document.write("</div>\n\n");
+	}
+}
+
+//-->
+</script>
+
+<hr>
+
+<p>
+There are _totalentries_ entries in the database and _totalresults_ matched your query.
+</p>
+
+
+<center>
+<small><small>Search by <a href="http://www.ruter.net/soft/rutersearch/">RuterSearch</a></small></small>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>RuterSearch Documentation</title>
+		<style type="text/css">
+		<!--
+			body,h1,h2,h3,h4,p,td,ol,ul,li,blockquote {
+				font-family: Veranda,Arial,Helvetica,Serif;
+			}
+			tt,code {
+				font-family: fixed;
+			}
+		-->
+		</style>
+	</head>
+	<body>
+		<h1>RuterSearch Documentation</h1>
+		<div><b>RuterSearch Perl version 3.5</b></div>
+		<div>Programming Language: Perl, version 5; Also available in Php</div>
+		<div>Database support: MySQL and Text Delimited File</div>
+
+		<p>RuterSearch, RuterSoft, all code; copyright &copy; 2001; Weston Ruter<p/>
+
+		<address>RuterSearch homepage: <a href="http://www.Ruter.net/soft/rutersearch/">http://www.ruter.net/soft/rutersearch/</a></address><br />
+
+		<h2>Contents:</h2>
+		<ol>
+			<li>
+				<a href="#history">History</a>
+			</li>
+			<li>
+				<a href="#features">Features</a>
+			</li>
+			<li>
+				<a href="#installation">Installation</a>
+			</li>
+			<li>
+				<a href="#configuration">Configuration and Customization</a>
+			</li>
+			<li>
+				<a href="#running">Running RuterSearch</a>
+			</li>
+			<li>
+				<a href="#troubleshooting">Troubleshooting</a>
+			</li>
+		</ol>
+
+		<p>Awhile ago, before I was a Perl programmer, I wanted to start a search engine. I searched and 
+		searched, but I couldn't find one that I could afford and one that I liked. So I settled for a lesser 
+		search engine (for $50) that I thought would serve my needs. Since I was not a programmer, I had 
+		no idea what features a search engine should have, and I paid the price for my naivety. That 
+		search engine was pathetic, a total disappointment, and a rip off. My mistake.</p>
+
+		<p>So when I became a Perl programmer, I started RuterSearch. I wanted it to be better than any 
+		other, and cheaper. So I incorporated everything that I would have wanted, and what I anticipate 
+		you need. I have spent more time on this project than any other, and I hope it shows!</p>
+
+		<a name="history"><h2>History</h2></a>
+		<table border="1" cellspacing="1" cellpadding="3" width="100%" >
+			<tr valign="top">
+				<td width="10%">
+				v1.0 Perl<br />
+				Winter '99
+				</td>
+
+				<td width="90%">
+					<ul>
+						<li>Simple search routine developed. Importance based on the matched word's location in the entry. (title, description, etc.)</li>
+						<li>Addition program for easy addition of new entries</li>
+						<li>Very easy customization of design in search and search result pages using substitutions</li>
+						<li>CSS used in layout of results</li>
+						<li>"Previous/Next page of results", "End of Results", and "No matches" messages scripted.</li>
+						<li>Helpful error messages</li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<td>
+				v2.0 Perl<br />
+				Spring '00
+				</td>
+
+				<td>
+					<ul>
+						<li>Syntax for requiring words. (e.g.. +required)</li>
+						<li>Search History for keeping track of what the user has searched for.</li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<td>
+				v3.0 Perl<br />
+				v1.0 Php<br />
+				Summer '00
+				</td>
+
+				<td>
+					<ul>
+						<li>Radical redesign of search. Importance based on number of matches (including all sections) and locations in an entry.</li>
+						<li>Numerous new syntax features like quoted phrases ("a phrase"), required words (+required), required not words (-not), section restrictions (title, description, etc.) and wildcards searches (e.g. Ruter*, ?uter, *zilla, etc.).</li>
+						<li>Styling of matched words</li>
+						<li>Total customization with result template (resulttemplate.html)</li>
+						<li>Administration program for easy configuration of RuterSearch (no editing of code)</li>
+						<li>Very simple installation program.</li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<td>
+				v3.5 Perl<br />
+				v1.5 Php<br />
+				Winter '00
+				</td>
+
+				<td>
+					<ul>
+						<li>A couple of small bug fixes</li>
+						<li>MySQL database support added</li>
+						<li>Installation program integrated into administration</li>
+						<li>Administration completely re-done. Search history, entry management, documentation, and more can all be accessed through administration</li>
+						<li>Website Spider for the quick addition of many websites</li>
+						<li>Documentation greatly expanded</li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<td>
+				v4.0 Perl<br />
+				v2.0 Php<br />
+				(coming up)</td>
+
+				<td>
+					<ul>
+						<li>Entry editing program</li>
+						<li>Done in 3.5: Website spider</li>
+						<li>Error help: online troubleshooting pages</li>
+						<li>Date restricted searches</li>
+						<li>New additions page</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+
+
+		<a name="features"><h2>Features</h2></a>
+		<ol>
+			<li>
+			<big>Installation program:</big>&nbsp; Sometimes large scripts are hard to install, especially for a novice. 
+				So I devised an installation program to automatically setup files for use on your server. All you have 
+				to do is upload all files and folders in the RuterSearch archive. Additionally, if you are using a UNIX type
+				system you will need to edit the path to perl on the first lone of "admin.cgi" and <tt>chmod 755 admin.cgi</tt>. 
+				Detailed instructions on how to install RuterSearch can be <a href="#installation">found here</a>.
+			</li>
+
+			<li>
+			<big>Administration:</big> Many search engines require you to edit code in order for everything to be 
+				configured just how you want. Since most people are not programmers, this can be an unfriendly task.
+				Therefore I created an Administration program to handle most of the configuration for you.
+			</li>
+
+			<li>
+			<big>Search syntax:&nbsp;</big> RuterSearch has more syntax features than even Yahoo! Here is the syntax for 
+				searching RuterSearch:
+			<ul>
+				<li>
+				<b>Phrases</b>: To search for a certain sequence of words (a phrase), set it off with double quotation marks. 
+					To RuterSearch, phrases work much like regular search words.
+					<i>Example: "Spanish food"</i>
+				</li>
+				<li>
+				<b>Required words</b>: To require that a word to be in a entry, put a plus sign before the word. 
+					<i>Examples: +Mozilla, +"perl scripts"</i>
+				</li>
+				<li>
+				<b>Rejected words</b>: To reject an entry that has a certain word, put a minus sign before the word. 
+					<i>Examples: -Microsoft -"Bill Gates"</i>
+				</li>
+				<li>
+				<b>Section restrictions</b>: Website entries in RuterSearch are divided into sections, which are:
+					title, description, url, keywords, and author (also date and type). As default, a search is performed on every section of an entry. 
+					To restrict searching of a word to a specific section of an entry, enter the name of the section 
+					or the first letter of the section, followed by a pair of parentheses, and within the parentheses, 
+					enter the search query. You can use different section restrictors together. <i>Examples: title(Mozilla) and t(Mozilla); u(netscape.com) and url(netscape.com);
+					etc...&nbsp; searchable sections are: title, description, url, keywords, and author</i>.
+				</li>
+				<li>
+				<b>Wildcards</b>: There are two wildcards, "?" and "*", same as Windows and Unix/Linux. A question 
+					mark "?" matches a single character. An asterisk "*" matches multiple characters. 
+					<i>Examples: (e.g. Ruter*, ?uter, *script, ?ozill*, etc.)</i>
+				</li>
+				<li>
+				<b><i>Summary:</i></b> All syntax features can be used together to create complex searches. Here 
+					is the order in which you can combine syntax: </li>
+					<ol>
+						<li>section restrictions</li>
+						<li>required and rejected words</li>
+						<li>words and phrases. <i>Examples Below<b></b></i></li>
+					</ol>
+
+					<blockquote>
+					<ul>
+						<li>+elections -local keywords(+politic*)</li>
+						<li>title(+browser -"Internet Explorer" -IE) Netscape Mozilla</li>
+						<li>+perl -C++ title(RuterSoft) author("Weston Ruter")</li>
+					</ul>
+					</blockquote>
+					<li>
+						<a name="substitutions"><big>Substitutions:</big></a> One feature that everyone needs is 
+							customization. Every page needs to look exactly how you want and substitutions allow you to 
+							do that easily and effectively. This is how substitutions work: Lets say you want to 
+							customize the search results page, you would open <i>html/searchresults.html</i> in your favorite 
+							html editor and design it however you want by incorporating substitutions such as <tt>_totalentries_</tt>
+							and <tt>_totalresults_</tt> (see below for more) where you want them to be displayed. When a search is
+							performed, the search engine would open <i>searchresults.html</i> and substitute the substitution with
+							the real value. There are five pages that are customizable in this way, and they are <i>search.html, 
+							searchresults.html, resulttemplate.html, add.html, and additionresults.html</i>. <i>search.html</i>
+							is the search home page which is displayed when no search has been made. <i>searchresults.html and 
+							resulttemplate.html</i> are used together. <i>searchresults.html</i> is the page where the results 
+							are displayed, and the code in <i>resulttemplate.html</i> determines what each result looks like. <b>More information about 
+							customizing the look of RuterSearch can be <a href="#configuration">found here</a></b>.
+							All substitutions are case insensitive. <i>Examples: <tt>_totalentries_</tt> replaced with 150; <tt>_totalresults_</tt> replaced with 12; etc...</i> Here is a list of all Substitutions:
+					</li>
+				</ul>
+<p>
+<blockquote>
+<b><a name="searchresults">Search results page <i>searchresults.html</i>:</a></b> Where the results are displayed
+	<table border="1" cellspacing="0" cellpadding="4" >
+<tr>
+<td>
+<center>_totalentries_</center>
+</td>
+
+<td>Total number of entries in your database.</td>
+</tr>
+
+<tr>
+<td>
+<center>_totalresults_</center>
+</td>
+
+<td>Total number of results from the search.</td>
+</tr>
+
+<tr>
+<td>
+<center>_nextpageurl_</center>
+</td>
+
+<td>Url of the next page of results. Javascript alert if at end</td>
+</tr>
+
+<tr>
+<td>
+<center>_nextpage_</center>
+</td>
+
+<td>Returns 'true' if there is another page of results, and 'false' if
+not.</td>
+</tr>
+
+<tr>
+<td>
+<center>_previouspageurl_</center>
+</td>
+
+<td>Url of the previous page of results. Javascript alert if at beginning</td>
+</tr>
+
+<tr>
+<td>
+<center>_previouspage_</center>
+</td>
+
+<td>Returns 'true' if there is a previous page of results, and 'false'
+if not.</td>
+</tr>
+
+<tr>
+<td>
+<center>_stylewords_</center>
+</td>
+
+<td>Returns 'true' if styling of words was used , and 'false' if not.</td>
+</tr>
+
+<tr>
+<td>
+<center>_perpage_</center>
+</td>
+
+<td>The number of results displayed per page</td>
+</tr>
+
+<tr>
+<td>
+<center>_currentpage_</center>
+</td>
+
+<td>The page of results that is being displayed</td>
+</tr>
+
+<tr>
+<td>
+<center>_searchquerytext_</center>
+</td>
+
+<td>Exactly what the user searched for in plain text. Not recommended for
+use in html tags.</td>
+</tr>
+
+<tr>
+<td>
+<center>_searchqueryhtml_</center>
+</td>
+
+<td>What the user searched for, but with some characters changed to html
+character entities. " to &amp;quot; etc... This should be used most often.
+Doesn't cause problems with html tags.&nbsp;</td>
+</tr>
+
+<tr>
+<td>
+<center>_searchqueryencoded_</center>
+</td>
+
+<td>What the user searched for but url encoded. <i>Example: %2BMozilla+does+%22X+M+L%22</i></td>
+</tr>
+
+<tr>
+<td>
+<center>_searchtype_</center>
+</td>
+
+<td>File type that was searched for. <i>E.g. html</i></td>
+</tr>
+
+<tr>
+<td>
+<center>_searchresults_</center>
+</td>
+
+<td>Displays all the results. Either in a predefined format or the way
+you defined in "resulttemplate.html". See administration</td>
+</tr>
+</table>
+<br />
+
+<b><a name="resulttemplate">Result template <i>resulttemplate.html</i>:</a></b> Template for displaying results.
+Must be turned on in administration
+
+<table border="1" cellspacing="0" cellpadding="4" >
+<tr>
+<td>
+<center>_date_</center>
+</td>
+
+<td>Date result was added/modified&nbsp;</td>
+</tr>
+
+<tr>
+<td>
+<center>_type_</center>
+</td>
+
+<td>File type of result</td>
+</tr>
+
+<tr>
+<td>
+<center>_title_</center>
+</td>
+
+<td>Title of result</td>
+</tr>
+
+<tr>
+<td>
+<center>_description_</center>
+</td>
+
+<td>Description of result</td>
+</tr>
+
+<tr>
+<td>
+<center>_url_</center>
+</td>
+
+<td>Url of result</td>
+</tr>
+
+<tr>
+<td>
+<center>_keywords_</center>
+</td>
+
+<td>Keywords of result</td>
+</tr>
+
+<tr>
+<td>
+<center>_author_</center>
+</td>
+
+<td>Author of result</td>
+</tr>
+</table>
+<br />
+
+<b><a name="addpage">Addition page:</a></b> Where the user inputs the new entry
+<table border="1" cellspacing="0" cellpadding="4" >
+<tr>
+<td>
+<center>_totalentries_</center>
+</td>
+
+<td>Total number of entries in your database.</td>
+</tr>
+</table>
+
+
+<br />
+
+<b><a name="addresults">Addition results page:</a></b> Results of addition
+<table border="1" cellspacing="0" cellpadding="4" >
+<tr>
+<td>
+<center>_totalentries_</center>
+</td>
+
+<td>Total number of entries in your database.</td>
+</tr>
+
+<tr>
+<td>
+<center>_date_</center>
+</td>
+
+<td>Date entry was added/modified&nbsp;</td>
+</tr>
+
+<tr>
+<td>
+<center>_type_</center>
+</td>
+
+<td>File type of entry</td>
+</tr>
+
+<tr>
+<td>
+<center>_title_</center>
+</td>
+
+<td>Title of entry</td>
+</tr>
+
+<tr>
+<td>
+<center>_description_</center>
+</td>
+
+<td>Description of entry</td>
+</tr>
+
+<tr>
+<td>
+<center>_url_</center>
+</td>
+
+<td>Url of entry</td>
+</tr>
+
+<tr>
+<td>
+<center>_keywords_</center>
+</td>
+
+<td>Keywords of entry</td>
+</tr>
+
+<tr>
+<td>
+<center>_author_</center>
+</td>
+
+<td>Author of entry</td>
+</tr>
+</table>
+</blockquote>
+</p>
+				<ul>
+					<li>
+						<big>Styling of matched words:</big> Another option I built in is the styling of matched words. 
+					If turned on (either by user or by administration), a word that was matched will be highlighted in 
+					the way you specify. To change the style of matched words, look at the class <i><b>.matchedWord</b></i> in 
+					the &lt;style&gt; tag of <i>searchresults.html</i>. <a href="#configuration">More info</a>
+					</li>
+					<li>
+						<big>Databases:</big> RuterSearch comes in two versions, one with MySQL support and one without. But both support a Text Delimited Database File which was the only available database type in earlier versions. Entries can be added and deleted from Administration.
+					</li>
+					<li>
+						<big>Query record:</big> From Administration, a record of search queries and other information about the user can be viewed by clicking on the link labeled "Search History". 
+					</li>
+					<li>
+						<big>Addition page:</big> This is designed to simplify the addition of the new entries. From Administration, you can password protect access to the addition page with the Administration password.
+					</li>
+					<li>
+						<big>Website spider:</big> The website spider simply parses out all links in an HTML file. It then visits each of those URL's and gets information such as the title, description, keywords, and author. And finally it adds each qualified entry to the database.  From Administration, you can password protect access to the spider with the Administration password.
+					</li>
+				</ul>
+			</li>
+		</ol>
+
+		<a name="installation"><h2>Installation</h2></a>
+		<p>As of RuterSearch Perl version 3.5 and RuterSearch Php version 1.5, the installation program has been 
+			integrated into the administration program <i>admin.cgi</i>. Here are instructions for installing RuterSearch:</p>
+
+		<ol>
+			<li>Extract the files from the downloaded archive to a temporary folder.</li>
+			<li>Upload all files and folders to the desired location on your server, most likely the <i>CGI-BIN</i> for Perl scripts. Usually this is done with an FTP client such as <a href="http://www.ipswitch.com/cgi/download_eval.pl?product=WL-1000">WS_FTP</a>.</li>
+			<li>For UNIX type systems, you will need to modify the first line of <i>admin.cgi</i> to reflect your path to perl. Most likely the first line will need to look like one of the following: <br />
+				<tt>#!/usr/bin/perl -w</tt>
+					<br />&nbsp;&nbsp;<b>or</b><br />
+				<tt>#!/usr/local/bin/perl -w</tt><br />
+				If these paths do not work, you can type in <tt>which perl</tt> into a Telnet prompt or just ask your system administrator.</li>
+			<li>
+			<li><a name="setpermissions">Additionally for UNIX type systems: set <i>install.cgi</i>'s permissions</a> to execute (Linux/Unix command <i>CHMOD 755</i>).
+				Usually your FTP client will have CHMOD ability built in and you should be able to find it. You need to set
+				<i>admin.cgi</i>'s permissions to CHMOD 755 which means all execute, owner write, and read.<br />
+				If your FTP Client doesn't have CHMOD built in, you can simply type the command directly into a Telnet prompt. An example of this is:
+
+				<table cellpadding="10" cellspacing="3" border="1">
+				<tr><td><tt>
+				Login: <b>johnsmith</b><br />
+				Password: (password hidden)<br />
+				<br />
+				[johnsmith@245.27.1.120 johnsmith]$ <b>cd http-home/rutersearch</b><br />
+				[johnsmith@245.27.1.120 rutersearch]$ <b>chmod 755 admin.cgi</b>
+				</tt></td></tr>
+				</table>
+			</li>
+			<li>
+				Now run <i>admin.cgi</i> from your browser and it will setup all files that will be used by RuterSearch.
+			</li>
+		</ol>
+
+
+
+
+
+		<a name="configuration"><h2>Configuration and Customization</h2></a>
+		<ol>
+			<li>
+				After you install RuterSearch, you can configure it however how you like. 
+				And the best way to do this is through the RuterSearch administration program. Login to 
+				<i>admin.cgi</i> with your password (the default password is <i>password</i>).
+			</li>
+			<li>
+				Basically everything that you might need to do to configure RuterSearch, you can do from within 
+				Administration. But <b>customizing</b> the page look is a bit different. Below I will explain:
+			</li>
+			<li><h3>Customization</h3>
+				<p>The way RuterSearch displays pages is it that when it is run, it takes in specific HTML pages that you have created, and then it substitutes
+					data onto specific locations on that page that you specify. This is done through the use of 
+					substitutions. By opening <i>search.html</i> (or any page listed below) in a text editor, you can design the search home page 
+					to look exactly how you want. Simply write HTML as you would normally 
+					for your website. When you want to display the total entries in the database, you would insert 
+					<tt>_totalentries_</tt> into the HTML page where you want that text displayed. For more information 
+					about substitutions and a list of all substitutions for each HTML page, 
+					<a href="#substitutions">click here</a>.</p>
+
+				<p>Below is a list of each editable page with descriptions.</p>
+				
+				<ul>
+					<li><b><i>search.html</i></b> - If someone accesses <i>search.cgi</i>, the search program, without searching for anything, this page is displayed. It is essentially a home page for the search engine.</li>
+					<li><b><i>searchresults.html</i></b> - This is the page that displays the results of a search. Design it how you want it to look then insert <tt>_searchresults_</tt> where you want to display the results of the user's search. Each returned result can be customized as well, which is done through editing the following file:</li>
+					<li><b><i>resulttemplate.html</i></b> - When a search is performed, this file is used as a template for the search engine to display each result. All results are appended to the substitution <tt>_searchresults_</tt>, which is then displayed in the previous file, <i>searchresults.html</i>.</li>
+					<li><b><i>add.html</i></b> - If you have decided to not restrict access to the addition page, this page will be useful if you want to enable users to add websites to the database.</li>
+					<li><b><i>additionresults.html</i></b> - This page shows the results of an addition to the database.</li>
+				</ul>
+
+				<p>To illustrate how to use substitutions, look at the following example which will display a message like "There are 125 entries in the database."</p>
+				<table border="1" cellpadding="5" cellspacing="2"><tr><td>
+					<tt>
+						&lt;html&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;My Search Engine&lt;/title&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type="text/css"&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-family: Arial, Helvetica;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to my search engine. There are _totalentries_ entries in the database.<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br />
+						&lt;/html&gt;
+					</tt>
+				</td></tr></table>
+
+				<p>The search results page is a bit more involved. In the &lt;head&gt; of <i>searchresults.html</i>, there is a &lt;style&gt; tag which contains information on how to display certain elements.
+				The most important style is the <b>.matchedWord</b> class which tells the user's browser how to highlight a matched word (if that option is enabled). The following code in the &lt;style&gt; tag would highlight matched words in yellow.</p>
+			
+				<table border="1" cellpadding="5" cellspacing="2"><tr><td>
+					<tt>
+						&lt;style type="text/css"&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;.matchedWord {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: yellow;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&lt;/style&gt;
+					</tt>
+				</td></tr></table>
+
+				<p>The user needs to be able to navigate back and forth through the results that have been found. This navigation can be appended to the <tt>_searchresults_</tt> substitution, or you can create your own navigation by using JavaScript and substitiutions together. The <i>searchresults.html</i> that comes with RuterSearch uses the JavaScript created navigation. </p>
+				
+			<p>Knowledge of HTML, preferably CSS, and possibly JavaScript, is required. But do not worry! These are very simple languages to learn. Pick up a book, or visit the <a href="http://w3.org/">W3C</a> for official specifications.</p>
+			</li>
+
+		</ol>		
+
+
+		<a name="running"><h2>Running RuterSearch</h2></a>
+		<ul>
+			<li>
+				To run a part of RuterSearch, do not open the HTML files for they are only templates.
+				Rather you need to run the CGI files, which are the program files. Following are all
+				the files that can be executed:
+			</li>
+			<ul>
+				<li>
+					<b>search.cgi</b> - Without any query, this will display the main search page (<i>search.html</i>). 
+					When a search query is made, <i>searchresults.html</i> is displayed with results displayed in the form of
+					<i>resulttemplate.html</i>.					
+				</li>
+				<li>
+					<b>add.cgi</b> - Run this program to add entries to the database. Without any query, <i>add.html</i> is displayed.
+					When an addition is made, <i>additionresults.html</i> is displayed.
+				</li>
+				<li>
+					<b>add.cgi</b> - This is another way to add entries to the database. By suppling a URL, the spider will 
+					visit that page and add each link to the database. The spider design cannot cannot be customized as <i>add.cgi</i> and <i>search.cgi</i> can.
+				</li>
+				<li>
+					<b>admin.cgi</b> - This allows you to make changes to RuterSearch.
+				</li>
+				<li>
+					<b>config.cgi</b> - This is not a program, but rather it is the configuration file. It ends in the extension "cgi" to prevent it from being viewed by people on the web.
+				</li>
+			</ul>
+		</ul>		
+
+		<a name="troubleshooting"><h2>Troubleshooting</h2></a>
+		<table border="1" cellspacing="1" cellpadding="3" width="100%" >
+			<tr bgcolor="#CCCCCC">
+				<td width="10%">
+				<center><b>Error Code</b></center>
+				</td>
+
+				<td width="90%">
+				<b>&nbsp; Description and Remedy</b>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>000</center>
+				</td>
+
+				<td>
+				Unable to open configuration file. Either run administration (admin.cgi) or reinstall the program.
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<center>001</center>
+				</td>
+
+				<td>
+				The database file cannot be found. Please verify that you have the correct filename entered in RuterSearch Administration
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>002</center>
+				</td>
+
+				<td>
+				The database type is invalid. Please reset the the database type to "text" or "MySQL" in Administration. 
+			</tr>
+
+			<tr>
+				<td>
+				<center>003</center>
+				</td>
+
+				<td>
+				The search page (search.html) cannot be found. Please make sure that there is a file names search.html in the "html" folder. If not you can extract a new one from your RuterSearch distribution archive.
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>004</center>
+				</td>
+
+				<td>
+				The result template file 'html/resulttemplate.html' could not be found. Make sure that it is in the folder 'html', or you may need to reinstall.
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>005</center>
+				</td>
+
+				<td>
+				Was not able to add to 'queryrecord.txt'. You may need to set the permissions to 'queryrecord.txt'. Make sure the permissions are for read and write (chmod 666).
+				</td>
+
+			</tr>
+
+			<tr>
+				<td>
+				<center>006</center>
+				</td>
+
+				<td>
+				Could not open search results file 'html/searchresults.html'. Make sure that the file is there, if it isn't, you should upload another.
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>007</center>
+				</td>
+
+				<td>
+				Unable to open the file 'html/add.html'. Make sure that the file is there, if it isn't, you should upload another.
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<center>008</center>
+				</td>
+
+				<td>
+				Unable to open the file 'html/additionresults.html'. Make sure that the file is there, if it isn't, you should upload another.
+				</td>
+			</tr>
+		</table>
+		<br />
+		<center><small>Validates as <a href="http://www.w3.org/">W3C</a> XHTML 1.0</small></center>
+	</body>
+</html>
